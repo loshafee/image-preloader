@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Preloader</title>
+	<style type="text/css">
+		img {
+			height: 100px;
+		}
+	</style>
+	<script type="text/javascript" src="../lib/preloader.js"></script>
+</head>
+<body>
+	<script type="text/javascript">
+
+		var p = new Preloader()
+		p.fallbackImage = 'https://cdn.mdn.mozilla.net/static/img/web-docs-sprite.22a6a085cf14.svg'
+		p.preload('https://avatars0.githubusercontent.com/u/12297373?s=40&v=4', ['https://s.gravatar.com/avatar/de89df7e5baf98e0cffe1e15dabbdf40?size=50&default=retro', 'https://cdn.mdn.mozilla.net/static/img/web-docs-sprite.22a6a085cf14.sv']).then((imgs) => {
+			console.log(imgs)
+			imgs.forEach((img) => {
+				document.body.appendChild(img.value)
+			})
+		})
+
+		p.onProgress = function(info) {
+			console.log('Images has loaded ' + (info.count / info.total * 100).toFixed(2) + '%')
+		}
+	</script>
+</body>
+</html>
